@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Create a vagrant VM, and fix the problem with version 4.3.10 of the VirtualBox guest additions
+vagrant up
+vagrant ssh -c 'sudo ln -s /opt/VBoxGuestAdditions-4.3.10/lib/VBoxGuestAdditions /usr/lib/VBoxGuestAdditions'
+vagrant reload
+
+# Configure the server using chef solo
+(cd chef; ./deploy.sh root@192.168.11.11)
+
+# Setup and deploy our application
+(
+  cd hello
+  cap bootstrap
+  cap deploy:setup
+  cap deploy
+  # set a secret_key_base
+  secret=`rake secret`
+  cap env:set SECRET_KEY_BASE=${secret}
+)
+
+# Run chef again to start unicorn
+(cd chef; ./deploy.sh root@192.168.11.11)

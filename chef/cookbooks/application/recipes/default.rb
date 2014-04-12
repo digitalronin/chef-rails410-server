@@ -1,0 +1,5 @@
+include_recipe "application::packages"
+include_recipe "application::application_user"
+include_recipe "application::deployment_user"
+include_recipe "application::unicorn"
+include_recipe "application::nginx"

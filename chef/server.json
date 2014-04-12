@@ -1,0 +1,8 @@
+{
+  "run_list": [
+    "recipe[ntp]",
+    "recipe[application]",
+    "recipe[ssh]",
+    "recipe[ufw]"
+  ]
+}

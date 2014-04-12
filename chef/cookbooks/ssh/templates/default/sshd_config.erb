@@ -1,0 +1,15 @@
+Protocol 2
+Port 22
+SyslogFacility AUTHPRIV
+PermitRootLogin yes
+PasswordAuthentication no
+ChallengeResponseAuthentication no
+UsePAM yes
+Subsystem       sftp    /usr/lib/openssh/sftp-server
+AllowUsers root vagrant
+UseDNS no
+X11Forwarding no
+MaxStartups 150
+KeepAlive yes
+ClientAliveInterval 120
+ClientAliveCountMax 5

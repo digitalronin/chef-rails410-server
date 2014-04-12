@@ -1,0 +1,16 @@
+require "recap/recipes/rails"
+
+set :application,       "hello"
+set :application_user,  "appuser"
+
+set :deploy_to,         "/home/#{application_user}/#{application}"
+
+# local vagrant VM, deploying from its local filesystem
+set :repository,              "file:///vagrant/#{application}/.git"
+server "root@192.168.11.11",  :app
+
+namespace :deploy do
+  task :restart do
+    run "kill -HUP `cat #{deploy_to}/tmp/unicorn.pid`"
+  end
+end

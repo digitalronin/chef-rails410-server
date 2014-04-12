@@ -1,0 +1,5 @@
+package 'build-essential'
+package 'git-core'
+package 'libsqlite3-dev'
+package 'nodejs'
+gem_package 'bundler'
